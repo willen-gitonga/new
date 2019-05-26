@@ -1,0 +1,36 @@
+<!-- display categories available -->
+{%macro displayCategoryList(category_list)%}
+
+  {% for category in category_list%}
+  <div id="pitch-category" class="container-fluid col-xs-12 col-sm-12 col-md-12 col-lg-12 pitch-card text-center">
+    <h2><a href="/categories/{{category.id}}"> {{ category.name }} </a></h2>
+    <h3><small>{{category.description}}</small></h3>
+  </div>
+
+  {%endfor%}
+
+{%endmacro%}
+
+<!-- show pitches -->
+{% macro displayPitchesList(Pitch_list) %}
+
+  {%for pitches in Pitch_list%}
+  <div id="pitches" class="container-fluid col-xs-12 col-sm-12 col-md-12 col-lg-12 pitch-card text-center">
+  <h3><a href="/pitch/{{pitches.id}}">{{pitches.content}}</a></h3>
+  <h4><small>{{pitches.posted}}</small></h4>
+</div>
+
+
+  {%endfor%}
+
+{%endmacro%}
+
+<!-- display comments -->
+{% macro displayCommentList(comment_list) %}
+
+  {%for comment in comment_list%}
+  <div id="comments" class="container-fluid col-xs-12 col-sm-12 col-md-12 col-lg-12 comment-card text-center">
+    <h3>{{comment.comment_content}}</h3>
+  </div>
+  {%endfor%}
+{%endmacro%}
