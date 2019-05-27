@@ -15,24 +15,22 @@ def index():
     '''
     title = 'Minute pitch'
     category = Category.get_category()
-
+  
     return render_template('index.html', title = title,category=category)
 
 
-@main.route('/categories/<int:id>')
-def categories(id):
-    '''
-    new route that will display the contents of a specific category
+@main.route("/pitches/<category>")
+def categories(category):
+    pitches = None
+    if category == "all":
+        pitches = Pitch.query.order_by(Pitch.time.desc())
 
-    '''
-    category = Category.query.get(id)
+    else:
+        pitches = Pitch.query.filter_by(category = category).order_by(Pitch.time.desc()).all()
 
-    if category is None:
-        abort(404)
 
-    title = f'{id}'
-    pitches = Pitch.get_pitches(id)
-    return render_template('categories.html',title = title, pitches=pitches,category=category)
+    return render_template("pitch.html",pitches = pitches)
+
 
 
 @main.route('/pitch/<int:id>', methods =['GET','POST'])
